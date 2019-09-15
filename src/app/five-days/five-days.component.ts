@@ -18,11 +18,15 @@ export class FiveDaysComponent implements OnInit {
   constructor(private weatherApiService: WeatherApiService,
               private dataStorageService: DataStorageService) {
     this.currentDay = this.weatherApiService.getCurrentDay();
+    this.weekWeather = this.weatherApiService.getWeek();
     if(dataStorageService.find(this.currentDay)) {
       this.fullHeartIcon();
       this.isFavorite = true;
     }
-    this.weekWeather = weatherApiService.getWeek();
+    this.weatherApiService.finishLoading.subscribe((flag) => {
+      this.currentDay = this.weatherApiService.getCurrentDay();
+      this.weekWeather = this.weatherApiService.getWeek();
+    })
    }
 
   ngOnInit() {

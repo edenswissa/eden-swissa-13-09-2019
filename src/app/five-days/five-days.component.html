@@ -15,6 +15,11 @@
         </div>
     </div>
     <div class="row justify-content-center">
+        <div class="col-xs-12">
+            <h5>{{currentDay.weatherText}}</h5>
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-xs-2" style="margin: 3%" *ngFor="let day of weekWeather; let i=index">
             <app-one-day [weatherDay]="day" [favoritePage]=false></app-one-day>
         </div>

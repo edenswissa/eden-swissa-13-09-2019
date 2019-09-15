@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   cityName : FormControl;
   showWeather : Boolean = false;
   autoCompleteArr: Observable<String[]>;
-  mapToStringAutoCopmleteArr : string[] = [];
+  mapToStringAutoCompleteArr : string[] = [];
   isLoading :Boolean = false;
 
   constructor(private weatherApiService : WeatherApiService, private fb: FormBuilder) {
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     });
     this.weatherApiService.autoCompleteFinishLoading.subscribe((flag) => {
       if(flag) {
-        this.mapToStringAutoCopmleteArr = this.weatherApiService.getAutoCompleteArr().map(item => item.city);
+        this.mapToStringAutoCompleteArr = this.weatherApiService.getAutoCompleteArr().map(item => item.city);
         this.autoCompleteArr = this.cityName.valueChanges.pipe(startWith(''),
           map(value => this._filter(value)));
       }
@@ -40,12 +40,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.mapToStringAutoCopmleteArr = [];
+    this.mapToStringAutoCompleteArr = [];
   }
 
   _filter(value : String) : String[]{
     const filterValue = value.toLowerCase();
-    return this.mapToStringAutoCopmleteArr.filter(place => place.toLowerCase().includes(filterValue));
+    return this.mapToStringAutoCompleteArr.filter(place => place.toLowerCase().includes(filterValue));
   }
 
   displayFunction(place) {

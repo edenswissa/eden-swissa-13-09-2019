@@ -1,6 +1,6 @@
 <div>
   <app-header></app-header>
-  <main>
+  <main class="Background" [style.background-image]="background ? background : null">
     <router-outlet></router-outlet>
   </main>
 </div>
