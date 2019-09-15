@@ -6,17 +6,12 @@ import { BehaviorSubject, from } from 'rxjs';
 import { MyLocation } from '../models/MyLocation'
 import * as moment from 'moment';
 
-import * as jsonData from '../../deleteJson/data.json';
-import * as specific_day from '../../deleteJson/spcific_day.json';
-
 @Injectable({ providedIn: 'root' })
 export class WeatherApiService {
     private week: WeatherDay[] = [] as WeatherDay[];
     private currentDay: WeatherDay = {} as WeatherDay;
     private autoCompleteArr: MyLocation[] = [];
 
-    // private data: any = jsonData;
-    // private specificDay: any = specific_day;
     finishLoading = new BehaviorSubject<Boolean>(false);
     autoCompleteFinishLoading = new BehaviorSubject<Boolean>(false);
 
@@ -132,36 +127,4 @@ export class WeatherApiService {
     getCurrentDay() {
         return this.currentDay;
     }
-
-    // getJsonData(cityName) {
-    //     let specificDay = {} as WeatherDay;
-    //     const specificData = this.specificDay.default[0];
-    //     specificDay.city = 'Tel Aviv';
-    //     specificDay.cityKey = 'cityKey'
-    //     specificDay.date = new Date(specificData.LocalObservationDateTime);
-    //     specificDay.dayAsStr = moment(specificData.date).format('ddd');
-    //     specificDay.dayAndMonthAsStr = moment(specificData.date).format('DD-MM');
-    //     specificDay.epochTime = specificData.EpochTime;
-    //     specificDay.icon = 'assets/icons/' + specificData.WeatherIcon + '.png';
-    //     specificDay.unit = specificData.Temperature.Metric.Unit;
-    //     specificDay.temperature = specificData.Temperature.Metric.Value;
-    //     specificDay.weatherText = specificData.WeatherText;
-    //     this.currentDay = specificDay;
-    //     console.log(this.currentDay)
-
-    //     this.data.default.DailyForecasts.forEach(day => {
-    //         let weatherDay = {} as WeatherDay;
-    //         weatherDay.city = 'Tel Aviv';
-    //         weatherDay.cityKey = 'cityKey';
-    //         weatherDay.date = new Date(day.Date);
-    //         weatherDay.dayAsStr = moment(weatherDay.date).format('ddd');
-    //         weatherDay.dayAndMonthAsStr = moment(weatherDay.date).format('DD-MM');
-    //         weatherDay.epochTime = day.EpochDate;
-    //         weatherDay.icon = 'assets/icons/' + day.Day.Icon + '.png';
-    //         weatherDay.unit = day.Temperature.Maximum.Unit;
-    //         weatherDay.temperature = Math.floor((day.Temperature.Maximum.Value + day.Temperature.Minimum.Value) / 2);
-    //         this.week.push(weatherDay);
-    //     });
-    //     this.finishLoading.next(true);
-    // }
 }

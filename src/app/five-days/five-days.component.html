@@ -1,25 +1,25 @@
 <div class="container cardContainer">
-    <div class="row justify-content-between">
+    <div class="row justify-content-start align-items-center" [@leftState]="leftState">
         <div class="col-xs-2">
-            <img src={{currentDay.icon}} style="height: 100%" alt="">
+            <img src={{currentDay.icon}} style="height: 9vh" alt="">
         </div>
         <div class="col-xs-4">
             <h3>{{currentDay.city}}</h3>
             <p>{{currentDay.temperature}} °{{currentDay.unit}}</p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-6" style="margin-left: auto">
             <i [ngClass]="heartIcon" 
                 (mouseover)="fullHeartIcon()" 
                 (mouseleave)="emptyHeartIcon()"
                 (click)="onFavoriteClick()"></i>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" [@leftState]="leftState">
         <div class="col-xs-12">
-            <h5>{{currentDay.weatherText}}</h5>
+            <p style="font-size: 5vw; font-weight: bold;">{{currentDay.weatherText}}</p>
         </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" [@rightState]="rightState">
         <div class="col-xs-2" style="margin: 3%" *ngFor="let day of weekWeather; let i=index">
             <app-one-day [weatherDay]="day" [favoritePage]=false></app-one-day>
         </div>
