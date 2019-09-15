@@ -1,0 +1,7 @@
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col-xs-2" style="margin: 3%" *ngFor="let fav of favorites; let i=index">
+                <app-one-day [weatherDay]="fav" [favoritePage]=true></app-one-day>
+        </div>
+    </div>
+</div>

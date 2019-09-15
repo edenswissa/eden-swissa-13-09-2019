@@ -1,0 +1,39 @@
+<div class="container cardContainer">
+    <div class="row justify-content-between">
+        <div class="col-xs-2">
+            <img src={{currentDay.icon}} style="height: 100%" alt="">
+        </div>
+        <div class="col-xs-4">
+            <h3>{{currentDay.city}}</h3>
+            <p>{{currentDay.temperature}} °{{currentDay.unit}}</p>
+        </div>
+        <div class="col-xs-6">
+            <i [ngClass]="heartIcon" 
+                (mouseover)="fullHeartIcon()" 
+                (mouseleave)="emptyHeartIcon()"
+                (click)="onFavoriteClick()"></i>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-xs-2" style="margin: 3%" *ngFor="let day of weekWeather; let i=index">
+            <app-one-day [weatherDay]="day" [favoritePage]=false></app-one-day>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="d-flex flex-row">
+        <div class="imgContainer">
+            <img src={{currentDay.icon}} style="height: 100%" alt="">
+        </div>
+        <div class="p-2 order-1 mr-auto my-flex-item">
+            <h3>{{currentDay.city}}</h3>
+            <p>{{currentDay.temperature}} °{{currentDay.unit}}</p>
+        </div>
+        <div class="p-2 order-2 my-flex-item">
+            <i class="fas fa-heart favIcon"></i>
+            <button class="favBtn" mat-raised-button color="accent">Add To Favorites</button>
+        </div>
+    </div> -->

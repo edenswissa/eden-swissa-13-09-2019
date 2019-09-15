@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xs-12 formContainer">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <mat-form-field>
+                    <input matInput type="text" [matAutocomplete]="auto" formControlName="cityName" placeholder="Please enter city name" (ngModelChange)="onInputChange($event)" required>
+                            <!-- <mat-error *ngIf="!userNameInput.valid">you have to fill user name</mat-error> -->
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction">
+                        <mat-option *ngFor="let place of autoCompleteArr | async" [value]="place">
+                            {{place}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>   
+                <button class="formBtn" mat-stroked-button type="submit" color="primary" [disabled]="form.invalid">Submit</button>
+            </form>
+        </div>
+    </div>
+    <mat-spinner *ngIf="isLoading" color="accent"></mat-spinner>
+    <div class="row justify-content-center" *ngIf="showWeather">
+        <div class="col-xs-12" style="width: 100%">
+            <app-five-days></app-five-days>
+        </div>
+    </div>
+</div>
+
+
+<!-- [matAutocomplete]="auto" -->

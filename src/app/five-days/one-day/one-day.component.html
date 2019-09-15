@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-header *ngIf="!favoritePage">
+        <mat-card-title>
+            {{weatherDay.dayAsStr}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{weatherDay.dayAndMonthAsStr}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-header *ngIf="favoritePage">
+            <mat-card-title>
+                {{weatherDay.city}}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{weatherDay.weatherText}}
+            </mat-card-subtitle>
+        </mat-card-header>
+    <mat-card-content>
+        <div class="imgContainer" style="text-align: center">
+            <img src={{weatherDay.icon}} alt="">
+        </div>
+        <p style="text-align: center">
+            {{weatherDay.temperature}} °{{weatherDay.unit}}
+        </p>
+    </mat-card-content>
+</mat-card>
