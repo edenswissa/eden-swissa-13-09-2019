@@ -22,6 +22,7 @@ export class WeatherApiService {
         this.autoCompleteArr = [];
         if (text) {
             const url: string = environment.weatherApi + 'locations/v1/cities/autocomplete';
+            console.log(url);
             const params = new HttpParams()
                 .set('apikey', environment.apiKey)
                 .set('q', text);
@@ -58,6 +59,7 @@ export class WeatherApiService {
 
     getAllWeather(location : MyLocation) {
         const url: string = environment.weatherApi + 'currentconditions/v1/' + location.cityKey;
+        console.log(url);
         const params = new HttpParams()
             .set('apikey', environment.apiKey);
         this.http.get(url, { params }).subscribe((data: any) => {
@@ -82,6 +84,7 @@ export class WeatherApiService {
 
     getAllWeatherByCityName(cityName: string) {
         const url: string = environment.weatherApi + 'locations/v1/cities/search';
+        console.log(url);
         const params = new HttpParams()
             .set('apikey', environment.apiKey)
             .set('q', cityName);
@@ -96,6 +99,7 @@ export class WeatherApiService {
 
     getFiveDaysWeather(cityKey: string, cityName: string) {
         const url: string = environment.weatherApi + 'forecasts/v1/daily/5day/' + cityKey;
+        console.log(url);
         const params = new HttpParams()
             .set('apikey', environment.apiKey)
             .set('metric', 'true');
