@@ -5,7 +5,8 @@ import {MatToolbarModule,
         MatButtonModule,
         MatProgressSpinnerModule,
         MatAutocompleteModule,
-        MatCardModule } from '@angular/material';
+        MatCardModule,
+         } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { OneDayComponent } from './five-days/one-day/one-day.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataStorageService } from '../app/services/dataStorage.service';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { DataStorageService } from '../app/services/dataStorage.service';
     HomeComponent,
     FiveDaysComponent,
     OneDayComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

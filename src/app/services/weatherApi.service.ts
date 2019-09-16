@@ -11,22 +11,25 @@ export class WeatherApiService {
     private week: WeatherDay[] = [] as WeatherDay[];
     private currentDay: WeatherDay = {} as WeatherDay;
     private autoCompleteArr: MyLocation[] = [];
+    private errorMessage : string;
 
     finishLoading = new BehaviorSubject<Boolean>(false);
     autoCompleteFinishLoading = new BehaviorSubject<Boolean>(false);
+    httpError = new BehaviorSubject<boolean>(false);
+
 
     constructor(private http: HttpClient) {
+
     }
 
     autoComplete(text: string) {
         this.autoCompleteArr = [];
         if (text) {
             const url: string = environment.weatherApi + 'locations/v1/cities/autocomplete';
-            console.log(url);
             const params = new HttpParams()
                 .set('apikey', environment.apiKey)
                 .set('q', text);
-            this.http.get(url, { params }).subscribe((data: any[]) => {
+            this.http.get(url,{ params:params} ).subscribe((data: any[]) => {
                 data.forEach(item => {
                     let place = {} as MyLocation;
                     place.city = item.LocalizedName;
@@ -35,10 +38,18 @@ export class WeatherApiService {
                 })
                 this.autoCompleteFinishLoading.next(true);
             }, (error) => {
-                console.log(error);
+                this.errorHandler(error);
             });
         }
+    }
 
+    errorHandler(error) {
+        this.errorMessage = "The allowed number of requests has been exceeded.";
+        this.httpError.next(true);
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
     }
 
     getAutoCompleteArr() {
@@ -62,7 +73,7 @@ export class WeatherApiService {
         console.log(url);
         const params = new HttpParams()
             .set('apikey', environment.apiKey);
-        this.http.get(url, { params }).subscribe((data: any) => {
+        this.http.get(url, { params:params}).subscribe((data: any) => {
             const weather: any = data[0];
             let weatherDay = {} as WeatherDay;
             weatherDay.city = location.city;
@@ -78,7 +89,7 @@ export class WeatherApiService {
             this.currentDay = weatherDay;
             this.getFiveDaysWeather(location.cityKey,location.city);
         }, (error) => {
-            console.log(error);
+            this.errorHandler(error);
         })
     }
 
@@ -93,7 +104,7 @@ export class WeatherApiService {
             const newCityName = data[0].EnglishName;
             this.getFiveDaysWeather(cityKey, newCityName);
         }, (error) => {
-            console.log(error);
+            this.errorHandler(error);
         });
     }
 
@@ -103,7 +114,7 @@ export class WeatherApiService {
         const params = new HttpParams()
             .set('apikey', environment.apiKey)
             .set('metric', 'true');
-        this.http.get(url, { params }).subscribe((data: any) => {
+        this.http.get(url, { params:params}).subscribe((data: any) => {
             const dailyForecasts: any[] = data.DailyForecasts;
             dailyForecasts.forEach(day => {
                 let weatherDay = {} as WeatherDay;
@@ -120,7 +131,7 @@ export class WeatherApiService {
             });
             this.finishLoading.next(true);
         }, (error) => {
-            console.log(error);
+            this.errorHandler(error);
         })
     }
 
