@@ -15,6 +15,9 @@
             </form>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <button mat-stroked-button (click)="getMyLocation()" color="accent">Show weather for my location</button>
+    </div>
     <mat-spinner *ngIf="isLoading" color="primary"></mat-spinner>
     <div class="row justify-content-center" *ngIf="showWeather">
         <div class="col-xs-12" style="width: 100%">

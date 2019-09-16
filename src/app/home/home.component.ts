@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
       if (flag) {
         this.errorMessage = this.weatherApiService.getErrorMessage();;
         this.isError = true;
-        console.log(this.isError);
+        this.isLoading = false;
       }
     })
   }
@@ -78,6 +78,17 @@ export class HomeComponent implements OnInit {
 
   onInputChange(event) {
     this.weatherApiService.autoComplete(event);
+  }
+
+  getMyLocation() {
+    if (navigator.geolocation) {
+      this.isLoading = true;
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.weatherApiService.getCurrentLocationWeather(position.coords.latitude, position.coords.longitude);
+        });
+    } else {
+      console.log("geoLocation not support");
+    }
   }
 
 }

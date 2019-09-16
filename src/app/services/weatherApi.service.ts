@@ -56,6 +56,23 @@ export class WeatherApiService {
         return [...this.autoCompleteArr];
     }
 
+    getCurrentLocationWeather(latitude, longitude) {
+        const url: string = environment.weatherApi + 'locations/v1/cities/geoposition/search';
+        const geoLocation:string = latitude + "," + longitude;
+        const params = new HttpParams()
+            .set('apikey', environment.apiKey)
+            .set('q', geoLocation);
+        this.http.get(url, { params }).subscribe((data: any) => {
+            const location : MyLocation = {
+                cityKey: data.ParentCity.Key,
+                city: data.ParentCity.EnglishName
+            } 
+            this.getAllWeather(location);
+        }, (error) => {
+            this.errorHandler(error);
+        });
+    }
+
     getWeather(cityName: string) {
         this.currentDay = {} as WeatherDay;
         this.week = [] as WeatherDay[];
